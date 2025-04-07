@@ -1,0 +1,649 @@
+=== Testing Code Snippet 1 ===
+Edit
+int a = 5;
+int b = 10;
+if (a < b) {
+    print("a es menor que b");
+} else {
+    print("a no es menor que b");
+}
+a = a + 1;
+cin(x);
+float pi = 3.14;
+print(pi);
+
+Tokens:
+('Edit', 'IDENTIFIER', 1, 4, 0)
+('int', 'TYPE', 6, 8, 1)
+('a', 'IDENTIFIER', 10, 10, 1)
+('=', 'OPERATOR', 12, 12, 1)
+('5', 'INTEGER', 14, 14, 1)
+(';', 'DELIMITER', 15, 15, 1)
+('int', 'TYPE', 17, 19, 2)
+('b', 'IDENTIFIER', 21, 21, 2)
+('=', 'OPERATOR', 23, 23, 2)
+('10', 'INTEGER', 25, 26, 2)
+(';', 'DELIMITER', 27, 27, 2)
+('if', 'KEYWORD', 29, 30, 3)
+('(', 'DELIMITER', 32, 32, 3)
+('a', 'IDENTIFIER', 33, 33, 3)
+('<', 'OPERATOR', 35, 35, 3)
+('b', 'IDENTIFIER', 37, 37, 3)
+(')', 'DELIMITER', 38, 38, 3)
+('{', 'DELIMITER', 40, 40, 3)
+('print', 'IDENTIFIER', 46, 50, 4)
+('(', 'DELIMITER', 51, 51, 4)
+('"a es menor que b"', 'STRING', 52, 69, 4)
+(')', 'DELIMITER', 70, 70, 4)
+(';', 'DELIMITER', 71, 71, 4)
+('}', 'DELIMITER', 73, 73, 5)
+('else', 'KEYWORD', 75, 78, 5)
+('{', 'DELIMITER', 80, 80, 5)
+('print', 'IDENTIFIER', 86, 90, 6)
+('(', 'DELIMITER', 91, 91, 6)
+('"a no es menor que b"', 'STRING', 92, 112, 6)
+(')', 'DELIMITER', 113, 113, 6)
+(';', 'DELIMITER', 114, 114, 6)
+('}', 'DELIMITER', 116, 116, 7)
+('a', 'IDENTIFIER', 118, 118, 8)
+('=', 'OPERATOR', 120, 120, 8)
+('a', 'IDENTIFIER', 122, 122, 8)
+('+', 'OPERATOR', 124, 124, 8)
+('1', 'INTEGER', 126, 126, 8)
+(';', 'DELIMITER', 127, 127, 8)
+('cin', 'IDENTIFIER', 129, 131, 9)
+('(', 'DELIMITER', 132, 132, 9)
+('x', 'IDENTIFIER', 133, 133, 9)
+(')', 'DELIMITER', 134, 134, 9)
+(';', 'DELIMITER', 135, 135, 9)
+('float', 'TYPE', 137, 141, 10)
+('pi', 'IDENTIFIER', 143, 144, 10)
+('=', 'OPERATOR', 146, 146, 10)
+('3.14', 'FLOAT', 148, 151, 10)
+(';', 'DELIMITER', 152, 152, 10)
+('print', 'IDENTIFIER', 154, 158, 11)
+('(', 'DELIMITER', 159, 159, 11)
+('pi', 'IDENTIFIER', 160, 161, 11)
+(')', 'DELIMITER', 162, 162, 11)
+(';', 'DELIMITER', 163, 163, 11)
+
+No Errors Found.
+
+=== Testing Code Snippet 2 ===
+Edit
+string nombre = "Luis";
+print(nombre);
+if (1) {
+    int edad = 21;
+    if (edad > 18)
+        print("Mayor de edad");
+    else
+        print("Menor de edad");
+} else {
+    print("Error de condición");
+}
+
+Tokens:
+('Edit', 'IDENTIFIER', 1, 4, 0)
+('string', 'TYPE', 6, 11, 1)
+('nombre', 'IDENTIFIER', 13, 18, 1)
+('=', 'OPERATOR', 20, 20, 1)
+('"Luis"', 'STRING', 22, 27, 1)
+(';', 'DELIMITER', 28, 28, 1)
+('print', 'IDENTIFIER', 30, 34, 2)
+('(', 'DELIMITER', 35, 35, 2)
+('nombre', 'IDENTIFIER', 36, 41, 2)
+(')', 'DELIMITER', 42, 42, 2)
+(';', 'DELIMITER', 43, 43, 2)
+('if', 'KEYWORD', 45, 46, 3)
+('(', 'DELIMITER', 48, 48, 3)
+('1', 'INTEGER', 49, 49, 3)
+(')', 'DELIMITER', 50, 50, 3)
+('{', 'DELIMITER', 52, 52, 3)
+('int', 'TYPE', 58, 60, 4)
+('edad', 'IDENTIFIER', 62, 65, 4)
+('=', 'OPERATOR', 67, 67, 4)
+('21', 'INTEGER', 69, 70, 4)
+(';', 'DELIMITER', 71, 71, 4)
+('if', 'KEYWORD', 77, 78, 5)
+('(', 'DELIMITER', 80, 80, 5)
+('edad', 'IDENTIFIER', 81, 84, 5)
+('>', 'OPERATOR', 86, 86, 5)
+('18', 'INTEGER', 88, 89, 5)
+(')', 'DELIMITER', 90, 90, 5)
+('print', 'IDENTIFIER', 100, 104, 6)
+('(', 'DELIMITER', 105, 105, 6)
+('"Mayor de edad"', 'STRING', 106, 120, 6)
+(')', 'DELIMITER', 121, 121, 6)
+(';', 'DELIMITER', 122, 122, 6)
+('else', 'KEYWORD', 128, 131, 7)
+('print', 'IDENTIFIER', 141, 145, 8)
+('(', 'DELIMITER', 146, 146, 8)
+('"Menor de edad"', 'STRING', 147, 161, 8)
+(')', 'DELIMITER', 162, 162, 8)
+(';', 'DELIMITER', 163, 163, 8)
+('}', 'DELIMITER', 165, 165, 9)
+('else', 'KEYWORD', 167, 170, 9)
+('{', 'DELIMITER', 172, 172, 9)
+('print', 'IDENTIFIER', 178, 182, 10)
+('(', 'DELIMITER', 183, 183, 10)
+('"Error de condición"', 'STRING', 184, 203, 10)
+(')', 'DELIMITER', 204, 204, 10)
+(';', 'DELIMITER', 205, 205, 10)
+('}', 'DELIMITER', 207, 207, 11)
+
+No Errors Found.
+
+=== Testing Code Snippet 3 ===
+Edit
+int i = 0;
+for (i = 0; i < 5; i = i + 1) {
+    print(i);
+}
+image portada = img("foto.jpg");
+print(portada);
+video intro = vid("intro.mp4");
+print(intro);
+
+Tokens:
+('Edit', 'IDENTIFIER', 1, 4, 0)
+('int', 'TYPE', 6, 8, 1)
+('i', 'IDENTIFIER', 10, 10, 1)
+('=', 'OPERATOR', 12, 12, 1)
+('0', 'INTEGER', 14, 14, 1)
+(';', 'DELIMITER', 15, 15, 1)
+('for', 'KEYWORD', 17, 19, 2)
+('(', 'DELIMITER', 21, 21, 2)
+('i', 'IDENTIFIER', 22, 22, 2)
+('=', 'OPERATOR', 24, 24, 2)
+('0', 'INTEGER', 26, 26, 2)
+(';', 'DELIMITER', 27, 27, 2)
+('i', 'IDENTIFIER', 29, 29, 2)
+('<', 'OPERATOR', 31, 31, 2)
+('5', 'INTEGER', 33, 33, 2)
+(';', 'DELIMITER', 34, 34, 2)
+('i', 'IDENTIFIER', 36, 36, 2)
+('=', 'OPERATOR', 38, 38, 2)
+('i', 'IDENTIFIER', 40, 40, 2)
+('+', 'OPERATOR', 42, 42, 2)
+('1', 'INTEGER', 44, 44, 2)
+(')', 'DELIMITER', 45, 45, 2)
+('{', 'DELIMITER', 47, 47, 2)
+('print', 'IDENTIFIER', 53, 57, 3)
+('(', 'DELIMITER', 58, 58, 3)
+('i', 'IDENTIFIER', 59, 59, 3)
+(')', 'DELIMITER', 60, 60, 3)
+(';', 'DELIMITER', 61, 61, 3)
+('}', 'DELIMITER', 63, 63, 4)
+('image', 'IDENTIFIER', 65, 69, 5)
+('portada', 'IDENTIFIER', 71, 77, 5)
+('=', 'OPERATOR', 79, 79, 5)
+('img', 'IDENTIFIER', 81, 83, 5)
+('(', 'DELIMITER', 84, 84, 5)
+('"foto.jpg"', 'STRING', 85, 94, 5)
+(')', 'DELIMITER', 95, 95, 5)
+(';', 'DELIMITER', 96, 96, 5)
+('print', 'IDENTIFIER', 98, 102, 6)
+('(', 'DELIMITER', 103, 103, 6)
+('portada', 'IDENTIFIER', 104, 110, 6)
+(')', 'DELIMITER', 111, 111, 6)
+(';', 'DELIMITER', 112, 112, 6)
+('video', 'IDENTIFIER', 114, 118, 7)
+('intro', 'IDENTIFIER', 120, 124, 7)
+('=', 'OPERATOR', 126, 126, 7)
+('vid', 'IDENTIFIER', 128, 130, 7)
+('(', 'DELIMITER', 131, 131, 7)
+('"intro.mp4"', 'STRING', 132, 142, 7)
+(')', 'DELIMITER', 143, 143, 7)
+(';', 'DELIMITER', 144, 144, 7)
+('print', 'IDENTIFIER', 146, 150, 8)
+('(', 'DELIMITER', 151, 151, 8)
+('intro', 'IDENTIFIER', 152, 156, 8)
+(')', 'DELIMITER', 157, 157, 8)
+(';', 'DELIMITER', 158, 158, 8)
+
+No Errors Found.
+
+=== Testing Code Snippet 4 ===
+Edit
+float x = 5.5;
+float y = 2.2;
+print(x * y);
+if (x > y)
+    print("x es mayor");
+else
+    print("y es mayor o igual");
+x = x - 1;
+print(x);
+
+Tokens:
+('Edit', 'IDENTIFIER', 1, 4, 0)
+('float', 'TYPE', 6, 10, 1)
+('x', 'IDENTIFIER', 12, 12, 1)
+('=', 'OPERATOR', 14, 14, 1)
+('5.5', 'FLOAT', 16, 18, 1)
+(';', 'DELIMITER', 19, 19, 1)
+('float', 'TYPE', 21, 25, 2)
+('y', 'IDENTIFIER', 27, 27, 2)
+('=', 'OPERATOR', 29, 29, 2)
+('2.2', 'FLOAT', 31, 33, 2)
+(';', 'DELIMITER', 34, 34, 2)
+('print', 'IDENTIFIER', 36, 40, 3)
+('(', 'DELIMITER', 41, 41, 3)
+('x', 'IDENTIFIER', 42, 42, 3)
+('*', 'OPERATOR', 44, 44, 3)
+('y', 'IDENTIFIER', 46, 46, 3)
+(')', 'DELIMITER', 47, 47, 3)
+(';', 'DELIMITER', 48, 48, 3)
+('if', 'KEYWORD', 50, 51, 4)
+('(', 'DELIMITER', 53, 53, 4)
+('x', 'IDENTIFIER', 54, 54, 4)
+('>', 'OPERATOR', 56, 56, 4)
+('y', 'IDENTIFIER', 58, 58, 4)
+(')', 'DELIMITER', 59, 59, 4)
+('print', 'IDENTIFIER', 65, 69, 5)
+('(', 'DELIMITER', 70, 70, 5)
+('"x es mayor"', 'STRING', 71, 82, 5)
+(')', 'DELIMITER', 83, 83, 5)
+(';', 'DELIMITER', 84, 84, 5)
+('else', 'KEYWORD', 86, 89, 6)
+('print', 'IDENTIFIER', 95, 99, 7)
+('(', 'DELIMITER', 100, 100, 7)
+('"y es mayor o igual"', 'STRING', 101, 120, 7)
+(')', 'DELIMITER', 121, 121, 7)
+(';', 'DELIMITER', 122, 122, 7)
+('x', 'IDENTIFIER', 124, 124, 8)
+('=', 'OPERATOR', 126, 126, 8)
+('x', 'IDENTIFIER', 128, 128, 8)
+('-', 'OPERATOR', 130, 130, 8)
+('1', 'INTEGER', 132, 132, 8)
+(';', 'DELIMITER', 133, 133, 8)
+('print', 'IDENTIFIER', 135, 139, 9)
+('(', 'DELIMITER', 140, 140, 9)
+('x', 'IDENTIFIER', 141, 141, 9)
+(')', 'DELIMITER', 142, 142, 9)
+(';', 'DELIMITER', 143, 143, 9)
+
+No Errors Found.
+
+=== Testing Code Snippet 5 ===
+Edit
+video clip1 = vid("a.mp4");
+video clip2 = vid("b.mp4");
+video total = clip1 concat clip2;
+print(total);
+int frames = 300;
+if (frames > 100)
+    print("Largo");
+else
+    print("Corto");
+
+Tokens:
+('Edit', 'IDENTIFIER', 1, 4, 0)
+('video', 'IDENTIFIER', 6, 10, 1)
+('clip1', 'IDENTIFIER', 12, 16, 1)
+('=', 'OPERATOR', 18, 18, 1)
+('vid', 'IDENTIFIER', 20, 22, 1)
+('(', 'DELIMITER', 23, 23, 1)
+('"a.mp4"', 'STRING', 24, 30, 1)
+(')', 'DELIMITER', 31, 31, 1)
+(';', 'DELIMITER', 32, 32, 1)
+('video', 'IDENTIFIER', 34, 38, 2)
+('clip2', 'IDENTIFIER', 40, 44, 2)
+('=', 'OPERATOR', 46, 46, 2)
+('vid', 'IDENTIFIER', 48, 50, 2)
+('(', 'DELIMITER', 51, 51, 2)
+('"b.mp4"', 'STRING', 52, 58, 2)
+(')', 'DELIMITER', 59, 59, 2)
+(';', 'DELIMITER', 60, 60, 2)
+('video', 'IDENTIFIER', 62, 66, 3)
+('total', 'IDENTIFIER', 68, 72, 3)
+('=', 'OPERATOR', 74, 74, 3)
+('clip1', 'IDENTIFIER', 76, 80, 3)
+('concat', 'IDENTIFIER', 82, 87, 3)
+('clip2', 'IDENTIFIER', 89, 93, 3)
+(';', 'DELIMITER', 94, 94, 3)
+('print', 'IDENTIFIER', 96, 100, 4)
+('(', 'DELIMITER', 101, 101, 4)
+('total', 'IDENTIFIER', 102, 106, 4)
+(')', 'DELIMITER', 107, 107, 4)
+(';', 'DELIMITER', 108, 108, 4)
+('int', 'TYPE', 110, 112, 5)
+('frames', 'IDENTIFIER', 114, 119, 5)
+('=', 'OPERATOR', 121, 121, 5)
+('300', 'INTEGER', 123, 125, 5)
+(';', 'DELIMITER', 126, 126, 5)
+('if', 'KEYWORD', 128, 129, 6)
+('(', 'DELIMITER', 131, 131, 6)
+('frames', 'IDENTIFIER', 132, 137, 6)
+('>', 'OPERATOR', 139, 139, 6)
+('100', 'INTEGER', 141, 143, 6)
+(')', 'DELIMITER', 144, 144, 6)
+('print', 'IDENTIFIER', 150, 154, 7)
+('(', 'DELIMITER', 155, 155, 7)
+('"Largo"', 'STRING', 156, 162, 7)
+(')', 'DELIMITER', 163, 163, 7)
+(';', 'DELIMITER', 164, 164, 7)
+('else', 'KEYWORD', 166, 169, 8)
+('print', 'IDENTIFIER', 175, 179, 9)
+('(', 'DELIMITER', 180, 180, 9)
+('"Corto"', 'STRING', 181, 187, 9)
+(')', 'DELIMITER', 188, 188, 9)
+(';', 'DELIMITER', 189, 189, 9)
+
+No Errors Found.
+
+=== Testing Code Snippet 6 ===
+Edit
+string saludo = "Hola ";
+string nombre = "Mundo";
+string mensaje = saludo + nombre;
+print(mensaje);
+cin(nombre);
+if (nombre == "Luis")
+    print("Bienvenido Luis");
+else
+    print("Usuario desconocido");
+
+Tokens:
+('Edit', 'IDENTIFIER', 1, 4, 0)
+('string', 'TYPE', 6, 11, 1)
+('saludo', 'IDENTIFIER', 13, 18, 1)
+('=', 'OPERATOR', 20, 20, 1)
+('"Hola "', 'STRING', 22, 28, 1)
+(';', 'DELIMITER', 29, 29, 1)
+('string', 'TYPE', 31, 36, 2)
+('nombre', 'IDENTIFIER', 38, 43, 2)
+('=', 'OPERATOR', 45, 45, 2)
+('"Mundo"', 'STRING', 47, 53, 2)
+(';', 'DELIMITER', 54, 54, 2)
+('string', 'TYPE', 56, 61, 3)
+('mensaje', 'IDENTIFIER', 63, 69, 3)
+('=', 'OPERATOR', 71, 71, 3)
+('saludo', 'IDENTIFIER', 73, 78, 3)
+('+', 'OPERATOR', 80, 80, 3)
+('nombre', 'IDENTIFIER', 82, 87, 3)
+(';', 'DELIMITER', 88, 88, 3)
+('print', 'IDENTIFIER', 90, 94, 4)
+('(', 'DELIMITER', 95, 95, 4)
+('mensaje', 'IDENTIFIER', 96, 102, 4)
+(')', 'DELIMITER', 103, 103, 4)
+(';', 'DELIMITER', 104, 104, 4)
+('cin', 'IDENTIFIER', 106, 108, 5)
+('(', 'DELIMITER', 109, 109, 5)
+('nombre', 'IDENTIFIER', 110, 115, 5)
+(')', 'DELIMITER', 116, 116, 5)
+(';', 'DELIMITER', 117, 117, 5)
+('if', 'KEYWORD', 119, 120, 6)
+('(', 'DELIMITER', 122, 122, 6)
+('nombre', 'IDENTIFIER', 123, 128, 6)
+('==', 'OPERATOR', 130, 130, 6)
+('"Luis"', 'STRING', 133, 138, 6)
+(')', 'DELIMITER', 139, 139, 6)
+('print', 'IDENTIFIER', 145, 149, 7)
+('(', 'DELIMITER', 150, 150, 7)
+('"Bienvenido Luis"', 'STRING', 151, 167, 7)
+(')', 'DELIMITER', 168, 168, 7)
+(';', 'DELIMITER', 169, 169, 7)
+('else', 'KEYWORD', 171, 174, 8)
+('print', 'IDENTIFIER', 180, 184, 9)
+('(', 'DELIMITER', 185, 185, 9)
+('"Usuario desconocido"', 'STRING', 186, 206, 9)
+(')', 'DELIMITER', 207, 207, 9)
+(';', 'DELIMITER', 208, 208, 9)
+
+No Errors Found.
+
+=== Testing Code Snippet 7 ===
+Edit
+int x = 0;
+int y = 10;
+for (x = 0; x < y; x = x + 1) {
+    if (x % 2 == 0)
+        print("Par");
+    else
+        print("Impar");
+}
+
+Tokens:
+('Edit', 'IDENTIFIER', 1, 4, 0)
+('int', 'TYPE', 6, 8, 1)
+('x', 'IDENTIFIER', 10, 10, 1)
+('=', 'OPERATOR', 12, 12, 1)
+('0', 'INTEGER', 14, 14, 1)
+(';', 'DELIMITER', 15, 15, 1)
+('int', 'TYPE', 17, 19, 2)
+('y', 'IDENTIFIER', 21, 21, 2)
+('=', 'OPERATOR', 23, 23, 2)
+('10', 'INTEGER', 25, 26, 2)
+(';', 'DELIMITER', 27, 27, 2)
+('for', 'KEYWORD', 29, 31, 3)
+('(', 'DELIMITER', 33, 33, 3)
+('x', 'IDENTIFIER', 34, 34, 3)
+('=', 'OPERATOR', 36, 36, 3)
+('0', 'INTEGER', 38, 38, 3)
+(';', 'DELIMITER', 39, 39, 3)
+('x', 'IDENTIFIER', 41, 41, 3)
+('<', 'OPERATOR', 43, 43, 3)
+('y', 'IDENTIFIER', 45, 45, 3)
+(';', 'DELIMITER', 46, 46, 3)
+('x', 'IDENTIFIER', 48, 48, 3)
+('=', 'OPERATOR', 50, 50, 3)
+('x', 'IDENTIFIER', 52, 52, 3)
+('+', 'OPERATOR', 54, 54, 3)
+('1', 'INTEGER', 56, 56, 3)
+(')', 'DELIMITER', 57, 57, 3)
+('{', 'DELIMITER', 59, 59, 3)
+('if', 'KEYWORD', 65, 66, 4)
+('(', 'DELIMITER', 68, 68, 4)
+('x', 'IDENTIFIER', 69, 69, 4)
+('%', 'OPERATOR', 71, 71, 4)
+('2', 'INTEGER', 73, 73, 4)
+('==', 'OPERATOR', 75, 75, 4)
+('0', 'INTEGER', 78, 78, 4)
+(')', 'DELIMITER', 79, 79, 4)
+('print', 'IDENTIFIER', 89, 93, 5)
+('(', 'DELIMITER', 94, 94, 5)
+('"Par"', 'STRING', 95, 99, 5)
+(')', 'DELIMITER', 100, 100, 5)
+(';', 'DELIMITER', 101, 101, 5)
+('else', 'KEYWORD', 107, 110, 6)
+('print', 'IDENTIFIER', 120, 124, 7)
+('(', 'DELIMITER', 125, 125, 7)
+('"Impar"', 'STRING', 126, 132, 7)
+(')', 'DELIMITER', 133, 133, 7)
+(';', 'DELIMITER', 134, 134, 7)
+('}', 'DELIMITER', 136, 136, 8)
+
+No Errors Found.
+
+=== Testing Code Snippet 8 ===
+Edit
+float base = 4.0;
+float altura = 3.0;
+float area = base * altura / 2;
+print(area);
+if (area > 5.0) {
+    print("Área suficiente");
+} else {
+    print("Área pequeña");
+}
+
+Tokens:
+('Edit', 'IDENTIFIER', 1, 4, 0)
+('float', 'TYPE', 6, 10, 1)
+('base', 'IDENTIFIER', 12, 15, 1)
+('=', 'OPERATOR', 17, 17, 1)
+('4.0', 'FLOAT', 19, 21, 1)
+(';', 'DELIMITER', 22, 22, 1)
+('float', 'TYPE', 24, 28, 2)
+('altura', 'IDENTIFIER', 30, 35, 2)
+('=', 'OPERATOR', 37, 37, 2)
+('3.0', 'FLOAT', 39, 41, 2)
+(';', 'DELIMITER', 42, 42, 2)
+('float', 'TYPE', 44, 48, 3)
+('area', 'IDENTIFIER', 50, 53, 3)
+('=', 'OPERATOR', 55, 55, 3)
+('base', 'IDENTIFIER', 57, 60, 3)
+('*', 'OPERATOR', 62, 62, 3)
+('altura', 'IDENTIFIER', 64, 69, 3)
+('/', 'OPERATOR', 71, 71, 3)
+('2', 'INTEGER', 73, 73, 3)
+(';', 'DELIMITER', 74, 74, 3)
+('print', 'IDENTIFIER', 76, 80, 4)
+('(', 'DELIMITER', 81, 81, 4)
+('area', 'IDENTIFIER', 82, 85, 4)
+(')', 'DELIMITER', 86, 86, 4)
+(';', 'DELIMITER', 87, 87, 4)
+('if', 'KEYWORD', 89, 90, 5)
+('(', 'DELIMITER', 92, 92, 5)
+('area', 'IDENTIFIER', 93, 96, 5)
+('>', 'OPERATOR', 98, 98, 5)
+('5.0', 'FLOAT', 100, 102, 5)
+(')', 'DELIMITER', 103, 103, 5)
+('{', 'DELIMITER', 105, 105, 5)
+('print', 'IDENTIFIER', 111, 115, 6)
+('(', 'DELIMITER', 116, 116, 6)
+('"Área suficiente"', 'STRING', 117, 133, 6)
+(')', 'DELIMITER', 134, 134, 6)
+(';', 'DELIMITER', 135, 135, 6)
+('}', 'DELIMITER', 137, 137, 7)
+('else', 'KEYWORD', 139, 142, 7)
+('{', 'DELIMITER', 144, 144, 7)
+('print', 'IDENTIFIER', 150, 154, 8)
+('(', 'DELIMITER', 155, 155, 8)
+('"Área pequeña"', 'STRING', 156, 169, 8)
+(')', 'DELIMITER', 170, 170, 8)
+(';', 'DELIMITER', 171, 171, 8)
+('}', 'DELIMITER', 173, 173, 9)
+
+No Errors Found.
+
+=== Testing Code Snippet 9 ===
+Edit
+int opcion = 1;
+if (opcion == 1)
+    print("Opción 1");
+else if (opcion == 2)
+    print("Opción 2");
+else
+    print("Opción no válida");
+string respuesta = "OK";
+print(respuesta);
+
+Tokens:
+('Edit', 'IDENTIFIER', 1, 4, 0)
+('int', 'TYPE', 6, 8, 1)
+('opcion', 'IDENTIFIER', 10, 15, 1)
+('=', 'OPERATOR', 17, 17, 1)
+('1', 'INTEGER', 19, 19, 1)
+(';', 'DELIMITER', 20, 20, 1)
+('if', 'KEYWORD', 22, 23, 2)
+('(', 'DELIMITER', 25, 25, 2)
+('opcion', 'IDENTIFIER', 26, 31, 2)
+('==', 'OPERATOR', 33, 33, 2)
+('1', 'INTEGER', 36, 36, 2)
+(')', 'DELIMITER', 37, 37, 2)
+('print', 'IDENTIFIER', 43, 47, 3)
+('(', 'DELIMITER', 48, 48, 3)
+('"Opción 1"', 'STRING', 49, 58, 3)
+(')', 'DELIMITER', 59, 59, 3)
+(';', 'DELIMITER', 60, 60, 3)
+('else', 'KEYWORD', 62, 65, 4)
+('if', 'KEYWORD', 67, 68, 4)
+('(', 'DELIMITER', 70, 70, 4)
+('opcion', 'IDENTIFIER', 71, 76, 4)
+('==', 'OPERATOR', 78, 78, 4)
+('2', 'INTEGER', 81, 81, 4)
+(')', 'DELIMITER', 82, 82, 4)
+('print', 'IDENTIFIER', 88, 92, 5)
+('(', 'DELIMITER', 93, 93, 5)
+('"Opción 2"', 'STRING', 94, 103, 5)
+(')', 'DELIMITER', 104, 104, 5)
+(';', 'DELIMITER', 105, 105, 5)
+('else', 'KEYWORD', 107, 110, 6)
+('print', 'IDENTIFIER', 116, 120, 7)
+('(', 'DELIMITER', 121, 121, 7)
+('"Opción no válida"', 'STRING', 122, 139, 7)
+(')', 'DELIMITER', 140, 140, 7)
+(';', 'DELIMITER', 141, 141, 7)
+('string', 'TYPE', 143, 148, 8)
+('respuesta', 'IDENTIFIER', 150, 158, 8)
+('=', 'OPERATOR', 160, 160, 8)
+('"OK"', 'STRING', 162, 165, 8)
+(';', 'DELIMITER', 166, 166, 8)
+('print', 'IDENTIFIER', 168, 172, 9)
+('(', 'DELIMITER', 173, 173, 9)
+('respuesta', 'IDENTIFIER', 174, 182, 9)
+(')', 'DELIMITER', 183, 183, 9)
+(';', 'DELIMITER', 184, 184, 9)
+
+No Errors Found.
+
+=== Testing Code Snippet 10 ===
+Edit
+image fondo = img("paisaje.png");
+image logo = img("logo.png");
+image resultado = fondo concat logo;
+print(resultado);
+int calidad = 100;
+if (calidad > 80)
+    print("Alta calidad");
+else
+    print("Calidad baja");
+
+Tokens:
+('Edit', 'IDENTIFIER', 1, 4, 0)
+('image', 'IDENTIFIER', 6, 10, 1)
+('fondo', 'IDENTIFIER', 12, 16, 1)
+('=', 'OPERATOR', 18, 18, 1)
+('img', 'IDENTIFIER', 20, 22, 1)
+('(', 'DELIMITER', 23, 23, 1)
+('"paisaje.png"', 'STRING', 24, 36, 1)
+(')', 'DELIMITER', 37, 37, 1)
+(';', 'DELIMITER', 38, 38, 1)
+('image', 'IDENTIFIER', 40, 44, 2)
+('logo', 'IDENTIFIER', 46, 49, 2)
+('=', 'OPERATOR', 51, 51, 2)
+('img', 'IDENTIFIER', 53, 55, 2)
+('(', 'DELIMITER', 56, 56, 2)
+('"logo.png"', 'STRING', 57, 66, 2)
+(')', 'DELIMITER', 67, 67, 2)
+(';', 'DELIMITER', 68, 68, 2)
+('image', 'IDENTIFIER', 70, 74, 3)
+('resultado', 'IDENTIFIER', 76, 84, 3)
+('=', 'OPERATOR', 86, 86, 3)
+('fondo', 'IDENTIFIER', 88, 92, 3)
+('concat', 'IDENTIFIER', 94, 99, 3)
+('logo', 'IDENTIFIER', 101, 104, 3)
+(';', 'DELIMITER', 105, 105, 3)
+('print', 'IDENTIFIER', 107, 111, 4)
+('(', 'DELIMITER', 112, 112, 4)
+('resultado', 'IDENTIFIER', 113, 121, 4)
+(')', 'DELIMITER', 122, 122, 4)
+(';', 'DELIMITER', 123, 123, 4)
+('int', 'TYPE', 125, 127, 5)
+('calidad', 'IDENTIFIER', 129, 135, 5)
+('=', 'OPERATOR', 137, 137, 5)
+('100', 'INTEGER', 139, 141, 5)
+(';', 'DELIMITER', 142, 142, 5)
+('if', 'KEYWORD', 144, 145, 6)
+('(', 'DELIMITER', 147, 147, 6)
+('calidad', 'IDENTIFIER', 148, 154, 6)
+('>', 'OPERATOR', 156, 156, 6)
+('80', 'INTEGER', 158, 159, 6)
+(')', 'DELIMITER', 160, 160, 6)
+('print', 'IDENTIFIER', 166, 170, 7)
+('(', 'DELIMITER', 171, 171, 7)
+('"Alta calidad"', 'STRING', 172, 185, 7)
+(')', 'DELIMITER', 186, 186, 7)
+(';', 'DELIMITER', 187, 187, 7)
+('else', 'KEYWORD', 189, 192, 8)
+('print', 'IDENTIFIER', 198, 202, 9)
+('(', 'DELIMITER', 203, 203, 9)
+('"Calidad baja"', 'STRING', 204, 217, 9)
+(')', 'DELIMITER', 218, 218, 9)
+(';', 'DELIMITER', 219, 219, 9)
+
+No Errors Found.
+
