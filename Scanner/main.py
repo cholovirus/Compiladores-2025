@@ -44,7 +44,7 @@ class Scan:
             while self.peekchar() and self.peekchar().isdigit():
                 number += self.getchar()
                 if( len(number) > 20 ):
-                    self.tokens.append((number, "ERROR",posIni,self.pos,self.newline))
+                    self.tokens.append((number, "ERROR Overflow int",posIni,self.pos,self.newline))
                     return True 
             
             if self.peekchar() == ".":  
@@ -53,12 +53,12 @@ class Scan:
                     while self.peekchar() and self.peekchar().isdigit():
                         number += self.getchar()
                         if( len(number) > 20 ):
-                            self.tokens.append((number, "ERROR",posIni,self.pos,self.newline))
+                            self.tokens.append((number, "ERROR Overflow float",posIni,self.pos,self.newline))
                             return True 
                     self.tokens.append((number, "FLOAT",posIni,self.pos,self.newline))
                 else:
                     number += self.getchar()
-                    self.tokens.append((number, "ERROR",posIni,self.pos,self.newline))
+                    self.tokens.append((number, "ERROR no decimal",posIni,self.pos,self.newline))
                     return True  
                 
             else:
@@ -149,7 +149,7 @@ class Scan:
         else :
             return False
 
-    def scanning(self):
+    def gettoken(self):
         while (self.pos < self.len):
             char= self.getchar()
             
@@ -174,21 +174,32 @@ class Scan:
             else :
                 try:
                     afterPos = self.pos-1
-                    self.tokens.append((char,"ERROR",afterPos,afterPos,self.newline))
+                    self.tokens.append((char,"ERROR no Gramatica",afterPos,afterPos,self.newline))
                 except IndexError:
                     self.tokens.append((char, "ERROR",0,0,self.newline))
         return self.tokens
 
 
 code = '''
-video intro = open("intro.mp4");
+?
+int a = 120201020120021021898982;
+float b = 1.t;
+float c = 1.2012010201020120102010201202112;
+for( int a=0; a<4;a=a+1){
+}
+if( a> b){
+}
+
+
+video intro = vid("intro.mp4");
+image log = img("logo.png");
 string name = "demo";
 
 print(intro concat img("logo.png"));
 '''
 
 test = Scan(code)
-tokens = test.scanning()
+tokens = test.gettoken()
 
 headers = ["Token", "TokenTYPE", "Inicio", "Fin", "Linea"]
 
