@@ -17,8 +17,8 @@ class Scan:
         self.tokens = []
         self.operator_ = {"+", "-", "*", "/","%", "=", "==", "!=", "<", ">", "<=", ">=", "&&", "||"}
         self.delimiter_ = {"(", ")", "{", "}", "[", "]", ",", ";"}
-        self.keyword_ = {"def", "if","elif", "else", "for", "input", "output","open","save"}
-        self.type_ = {"int", "float", "string"}
+        self.keyword_ = { "if", "else", "for", "input", "print","vid","img","save","concat"}
+        self.type_ = {"int", "float", "string","image","video"}
         
     
     def getchar(self):
@@ -181,13 +181,10 @@ class Scan:
 
 
 code = '''
+video intro = open("intro.mp4");
+string name = "demo";
 
-x_434o : float = 105555555.12189998989898989;
-x : float = 10.t;
-
-# hola
-## Comentario
- multilínea ##
+print(intro concat img("logo.png"));
 '''
 
 test = Scan(code)
@@ -196,3 +193,5 @@ tokens = test.scanning()
 headers = ["Token", "TokenTYPE", "Inicio", "Fin", "Linea"]
 
 print(tabulate(tokens, headers, tablefmt="grid"))
+
+#parser top down con tabla,
