@@ -51,11 +51,11 @@ class Scan:
             "concat": "concat"
         }
         self.type_ = {
-            "int": "Type_int",
-            "float": "Type_float",
-            "string": "Type_string",
-            "image": "Type_image",
-            "video": "Type_video"
+            "int": "int",
+            "float": "float",
+            "string": "string",
+            "image": "image",
+            "video": "video"
         }
         
     
@@ -93,14 +93,14 @@ class Scan:
                         if( len(number) > 20 ):
                             self.tokens.append((number, "ERROR Overflow float",posIni,self.pos,self.newline))
                             return True 
-                    self.tokens.append((number, "FLOAT",posIni,self.pos,self.newline))
+                    self.tokens.append((number, "NUMBER",posIni,self.pos,self.newline))
                 else:
                     number += self.getchar()
                     self.tokens.append((number, "ERROR no decimal",posIni,self.pos,self.newline))
                     return True  
                 
             else:
-                self.tokens.append((number, "INTEGER",posIni,self.pos,self.newline))
+                self.tokens.append((number, "NUMBER",posIni,self.pos,self.newline))
             return True
         else:
             return False
@@ -220,19 +220,27 @@ class Scan:
 
 
 code = '''
-video a = vid("hola.mp4");
-video b = vid ("adios.mp4");
-if (a!=b) {
-    video c = concat(a,b);
+if(a == b){
+    concat(a,b);
+    string stream = vid("ll1_table.mp4");
+    if( a == stream) {
+        print("iguales");
+    }
+    for (a=0;a<3;a=a+1;){
+    }
 }
-
-int a = 1+2
 '''
 
 test = Scan(code)
 tokens = test.gettoken()
+temp = [(t[1], t[0]) for t in tokens]
+temp.append(('$', '$'))
+tokens = [(t[1], t[0], *t[2:]) for t in tokens]
 
-headers = ["Token", "TokenTYPE", "Inicio", "Fin", "Linea"]
+for i in temp:
+    print(i)
+
+headers = ["TokenTYPE","Token", "Inicio", "Fin", "Linea"]
 
 print(tabulate(tokens, headers, tablefmt="grid"))
 

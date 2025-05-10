@@ -1,5 +1,5 @@
 import csv
-
+from main import temp
 def print_specific_nonterminal(parsing_table, nonterminal):
     """Imprime un no-terminal específico con formato"""
     if nonterminal in parsing_table:
@@ -49,9 +49,11 @@ def parse(tokens, parsing_table, start_symbol='Program'):
     while stack:
         top = stack.pop()
         current_token = tokens[index][0]
+        current_lexeme = tokens[index][1]
 
         # Caso 1: terminal coincide
         if top == current_token:
+            print(f"✔️ Token aceptado: {tokens[index]}")
             index += 1
             continue
 
@@ -64,6 +66,7 @@ def parse(tokens, parsing_table, start_symbol='Program'):
             row = parsing_table[top]
             if current_token in row:
                 prod = row[current_token]
+                # print(f"📘 Aplicando regla: {prod}")
                 # prod tiene la forma "NT -> X Y Z"; nos quedamos con la parte derecha
                 rhs = prod.split('->',1)[1].strip()
                 # separamos en símbolos, ignorando epsilones
@@ -74,10 +77,13 @@ def parse(tokens, parsing_table, start_symbol='Program'):
                 continue
             else:
                 # No hay producción para este par (top, current_token)
-                raise SyntaxError(f'Error de sintaxis: no hay producción para ({top}, {current_token})')
+                print(f"❌ Error de sintaxis: no hay producción para ({top}, {current_token})")
+                print(f"   Token problemático: {tokens[index]}")
+                return
         else:
             # top no es terminal válido ni no-terminal
-            raise SyntaxError(f'Error de sintaxis: símbolo inesperado {top}')
+            print(f"❌ Error de sintaxis: símbolo inesperado en pila: {top}")
+            return
 
     # Si consume todo
     if tokens[index][0] == '$':
@@ -86,34 +92,33 @@ def parse(tokens, parsing_table, start_symbol='Program'):
         print("❌ Quedaron tokens sin consumir:", tokens[index:])
 
 
-
 tokens = [
     ('if', 'if'),
     ('(', '('),
-    ('IDENTIFIER', 'IDENTIFIER'),
+    ('IDENTIFIER', 'a'),
     ('==', '=='),
-    ('IDENTIFIER', 'IDENTIFIER'),
+    ('IDENTIFIER', 'b'),
     (')', ')'),
     ('{', '{'),
     ('concat', 'concat'),
     ('(', '('),
-    ('IDENTIFIER', 'IDENTIFIER'),
+    ('IDENTIFIER', 'a'),
     (',', ','),
-    ('IDENTIFIER', 'IDENTIFIER'),
+    ('IDENTIFIER', 'b'),
     (')', ')'),
     (';', ';'),
     ('video', 'video'),
-    ('IDENTIFIER', 'IDENTIFIER'),
+    ('IDENTIFIER', 'viedo'),
     ('=', '='),
     ('vid', 'vid'),
     ('(', '('),
-    ('STRING', 'STRING'),
+    ('STRING', '"ll1_table.mp4"'),
     (')', ')'),
     (';', ';'),
     ('}', '}'),
     ('$', '$')
 ]
 
-
+tokens = temp
 
 parse(tokens, parsing_table)
