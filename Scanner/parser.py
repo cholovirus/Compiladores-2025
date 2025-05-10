@@ -1,5 +1,6 @@
 import csv
-from main import temp
+#from scanner import temp
+
 def print_specific_nonterminal(parsing_table, nonterminal):
     """Imprime un no-terminal específico con formato"""
     if nonterminal in parsing_table:
@@ -10,8 +11,6 @@ def print_specific_nonterminal(parsing_table, nonterminal):
                 print(f" terminal  '{term}': {prod}")
     else:
         print(f"Error: No terminal '{nonterminal}' no encontrado")
-
-
 
 def load_parsing_table(file_path):
     parsing_table = {}
@@ -49,7 +48,7 @@ def parse(tokens, parsing_table, start_symbol='Program'):
     while stack:
         top = stack.pop()
         current_token = tokens[index][0]
-        current_lexeme = tokens[index][1]
+        #current_lexeme = tokens[index][1]
 
         # Caso 1: terminal coincide
         if top == current_token:
@@ -67,7 +66,7 @@ def parse(tokens, parsing_table, start_symbol='Program'):
             if current_token in row:
                 prod = row[current_token]
                 # print(f"📘 Aplicando regla: {prod}")
-                # prod tiene la forma "NT -> X Y Z"; nos quedamos con la parte derecha
+        
                 rhs = prod.split('->',1)[1].strip()
                 # separamos en símbolos, ignorando epsilones
                 symbols = [s for s in rhs.split() if s not in ("''", '')]
@@ -119,6 +118,6 @@ tokens = [
     ('$', '$')
 ]
 
-tokens = temp
+#tokens = temp
 
-parse(tokens, parsing_table)
+#parse(tokens, parsing_table)
