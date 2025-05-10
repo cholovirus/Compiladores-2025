@@ -15,10 +15,50 @@ class Scan:
         self.newline = 0
         self.len = len(codigo)
         self.tokens = []
-        self.operator_ = {"+", "-", "*", "/","%", "=", "==", "!=", "<", ">", "<=", ">=", "&&", "||"}
-        self.delimiter_ = {"(", ")", "{", "}", "[", "]", ",", ";"}
-        self.keyword_ = { "if", "else", "for", "input", "print","vid","img","save","concat"}
-        self.type_ = {"int", "float", "string","image","video"}
+        self.operator_ = {
+            "+": "sum",
+            "-": "res",
+            "*": "mul",
+            "/": "div",
+            "%": "mod",
+            "=": "assign",
+            "==": "igual",
+            "!=": "not_igual",
+            "<": "menor",
+            ">": "mayor",
+            "<=": "menor_igual",
+            ">=": "mayor_igual",
+            "&&": "and",
+            "||": "or"
+        }
+        self.delimiter_ = {
+            "(": "paréntesis_izquierdo",
+            ")": "paréntesis_derecho",
+            "{": "llave_izquierda",
+            "}": "llave_derecha",
+            "[": "corchete_izquierdo",
+            "]": "corchete_derecho",
+            ",": "coma",
+            ";": "puntoComa"
+        }
+        self.keyword_ = {
+            "if": "Key_if",
+            "else": "Key_else",
+            "for": "Key_for",
+            "input": "Key_input",
+            "print": "Key_print",
+            "vid": "Key_video_funcion",
+            "img": "Key_imagen_funcion",
+            "save": "Key_guardar",
+            "concat": "Key_concatenar"
+        }
+        self.type_ = {
+            "int": "Type_int",
+            "float": "Type_float",
+            "string": "Type_string",
+            "image": "Type_image",
+            "video": "Type_video"
+        }
         
     
     def getchar(self):
@@ -75,9 +115,9 @@ class Scan:
             while self.peekchar() and (self.peekchar().isalnum() or self.peekchar() == "_"):
                 identifier += self.getchar()
             if identifier in self.keyword_ :
-                self.tokens.append((identifier, "KEYWORD",posIni,self.pos,self.newline))
+                self.tokens.append((identifier, self.keyword_[identifier],posIni,self.pos,self.newline))
             elif identifier in self.type_ :
-                self.tokens.append((identifier, "TYPE",posIni,self.pos,self.newline))
+                self.tokens.append((identifier, self.type_[identifier],posIni,self.pos,self.newline))
             else:
                 self.tokens.append((identifier, "IDENTIFIER",posIni,self.pos,self.newline))
             return True
@@ -127,26 +167,27 @@ class Scan:
 
 
     
-    def operator(self,char):
+    def operator(self, char):
         posIni = self.pos
-        if char in self.operator_:
-            lookahead = char + (self.peekchar() or "")
-            if lookahead in self.operator_:  
-                self.tokens.append((lookahead, "OPERATOR",posIni,self.pos,self.newline))
-                self.getchar()  # Consumir el segundo carácter
-            else:
-                self.tokens.append((char, "OPERATOR",posIni,self.pos,self.newline))
+        lookahead = char + (self.peekchar() or "")
+
+        if lookahead in self.operator_:
+            self.tokens.append((lookahead, self.operator_[lookahead], posIni, self.pos, self.newline))
+            self.getchar()  # Consumir el segundo carácter
             return True
-        else :
+        elif char in self.operator_:
+            self.tokens.append((char, self.operator_[char], posIni, self.pos, self.newline))
+            return True
+        else:
             return False
             
 
-    def delimiter(self,char):
+    def delimiter(self, char):
         posIni = self.pos
         if char in self.delimiter_:
-            self.tokens.append((char, "DELIMITER",posIni,self.pos,self.newline))
+            self.tokens.append((char, self.delimiter_[char], posIni, self.pos, self.newline))
             return True
-        else :
+        else:
             return False
 
     def gettoken(self):
@@ -181,21 +222,11 @@ class Scan:
 
 
 code = '''
-?
-int a = 120201020120021021898982;
-float b = 1.t;
-float c = 1.2012010201020120102010201202112;
-for( int a=0; a<4;a=a+1){
+video a = vid("hola.mp4");
+video b = vid ("adios.mp4");
+if (a!=b) {
+    video c = concat(a,b);
 }
-if( a> b){
-}
-
-
-video intro = vid("intro.mp4");
-image log = img("logo.png");
-string name = "demo";
-
-print(intro concat img("logo.png"));
 '''
 
 test = Scan(code)
