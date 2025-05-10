@@ -2,17 +2,8 @@ from scanner import *
 from parser import *
 
 # Lectura de codigo
-code = '''
-if(a == b){
-    concat(a,b);
-    string stream = vid("ll1_table.mp4");
-    if( a == stream) {
-        print("iguales");
-    }
-    for (a=0;a<3;a=a+1;){
-    }
-}
-'''
+with open("/home/cholo/uni/compiladores/Scanner/code.txt", "r", encoding="utf-8") as file:
+    code = file.read()
 
 # Realizar Scan
 test = Scan(code)
@@ -33,4 +24,5 @@ tokens.append(('$', '$',ultima_linea))
 print()
 print("VISUALIZACIÓN PARSER:")
 print()
-parse(tokens, parsing_table)
+#parser(tokens, parsing_table)
+parser2(tokens,parsing_table,FirstFollow)

@@ -1,0 +1,16 @@
+if(a == b){
+    concat(a,b);
+    string stream = vid("ll1_table.mp4");
+    if( a == stream) {
+        print("iguales");
+    }
+    image adio = img("pedro.mp4");
+    for (a=0;a<3;a=a+1;){
+    }
+    
+    image correcto = img("correcto.mp4");
+    image reinicio = img("reinicio.mp4");
+}else 
+    image reinicio = img("reinicio.mp4");
+}
+image reinicio = img("reinicio.mp4");
