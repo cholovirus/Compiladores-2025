@@ -16,41 +16,39 @@ class Scan:
         self.len = len(codigo)
         self.tokens = []
         self.operator_ = {
-            "+": "sum",
-            "-": "res",
-            "*": "mul",
-            "/": "div",
-            "%": "mod",
-            "=": "assign",
-            "==": "igual",
-            "!=": "not_igual",
-            "<": "menor",
-            ">": "mayor",
-            "<=": "menor_igual",
-            ">=": "mayor_igual",
-            "&&": "and",
-            "||": "or"
+            "+": "+",
+            "-": "-",
+            "*": "*",
+            "/": "/",
+            "%": "%",
+            "=": "=",
+            "==": "==",
+            "!=": "!=",
+            "<": "<",
+            ">": ">",
+            "<=": "<=",
+            ">=": ">=",
         }
         self.delimiter_ = {
-            "(": "paréntesis_izquierdo",
-            ")": "paréntesis_derecho",
-            "{": "llave_izquierda",
-            "}": "llave_derecha",
-            "[": "corchete_izquierdo",
-            "]": "corchete_derecho",
-            ",": "coma",
-            ";": "puntoComa"
+            "(": "(",
+            ")": ")",
+            "{": "{",
+            "}": "}",
+            "[": "[",
+            "]": "]",
+            ",": ",",
+            ";": ";"
         }
         self.keyword_ = {
-            "if": "Key_if",
-            "else": "Key_else",
-            "for": "Key_for",
-            "input": "Key_input",
-            "print": "Key_print",
-            "vid": "Key_video_funcion",
-            "img": "Key_imagen_funcion",
-            "save": "Key_guardar",
-            "concat": "Key_concatenar"
+            "if": "if",
+            "else": "else",
+            "for": "for",
+            "input": "input",
+            "print": "print",
+            "vid": "vid",
+            "img": "img",
+            "save": "save",
+            "concat": "concat"
         }
         self.type_ = {
             "int": "Type_int",
@@ -227,6 +225,8 @@ video b = vid ("adios.mp4");
 if (a!=b) {
     video c = concat(a,b);
 }
+
+int a = 1+2
 '''
 
 test = Scan(code)
