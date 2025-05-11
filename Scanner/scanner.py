@@ -213,4 +213,3 @@ class Scan:
                     self.tokens.append((char, "ERROR",0,0,self.newline))
         return self.tokens
 
-

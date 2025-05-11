@@ -1,6 +1,5 @@
 from scanner import *
 from parser import *
-from parserclass import *
 from tabulate import tabulate
 # Lectura de codigo
 with open("/home/cholo/uni/compiladores/Scanner/code.txt", "r", encoding="utf-8") as file:
@@ -25,8 +24,6 @@ tokens.append(('$', '$',ultima_linea))
 print()
 print("VISUALIZACIÓN PARSER:")
 print()
-#parser(tokens, parsing_table)
-#parser2(tokens,parsing_table,FirstFollow)
 parser = Parser(tokens)
 parser.parser()
-parser.showTableParser()
+parser.showTableParser(False)

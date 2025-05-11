@@ -1,4 +1,5 @@
 if(a == b){
+    int a=333333333333333333333333333333333333;
     concat(a,b);
     string stream = vid("ll1_table.mp4");
     if( a == stream) {
@@ -10,7 +11,4 @@ if(a == b){
     
     image correcto = img("correcto.mp4");
     image reinicio = img("reinicio.mp4");
-}else 
-    image reinicio = imge("reinicio.mp4");
 }
-image reinicio = img("reinicio.mp4");
