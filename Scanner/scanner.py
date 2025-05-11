@@ -1,5 +1,3 @@
-from tabulate import tabulate
-
 # gramtica:, comentarios, al menos 2 tipos de datos,
 # rango de enteros y flotantes
 # ids
@@ -8,6 +6,7 @@ from tabulate import tabulate
 # palabras reservadas
 # lenguaje, abrir video, componer videos, componer videos, 
 # delimitadores
+#parser top down con tabla,
 class Scan:
     def __init__(self,codigo):
         self.code = codigo
@@ -58,7 +57,6 @@ class Scan:
             "video": "video"
         }
         
-    
     def getchar(self):
         if self.pos < self.len:
             char = self.code[self.pos]
@@ -82,7 +80,7 @@ class Scan:
             while self.peekchar() and self.peekchar().isdigit():
                 number += self.getchar()
                 if( len(number) > 20 ):
-                    self.tokens.append((number, "ERROR Overflow int",posIni,self.pos,self.newline))
+                    self.tokens.append((number, "🔴 ERROR Overflow int",posIni,self.pos,self.newline))
                     return True 
             
             if self.peekchar() == ".":  
@@ -91,12 +89,12 @@ class Scan:
                     while self.peekchar() and self.peekchar().isdigit():
                         number += self.getchar()
                         if( len(number) > 20 ):
-                            self.tokens.append((number, "ERROR Overflow float",posIni,self.pos,self.newline))
+                            self.tokens.append((number, "🔴 ERROR Overflow float",posIni,self.pos,self.newline))
                             return True 
                     self.tokens.append((number, "NUMBER",posIni,self.pos,self.newline))
                 else:
                     number += self.getchar()
-                    self.tokens.append((number, "ERROR no decimal",posIni,self.pos,self.newline))
+                    self.tokens.append((number, "🔴 ERROR no decimal",posIni,self.pos,self.newline))
                     return True  
                 
             else:
@@ -216,4 +214,3 @@ class Scan:
         return self.tokens
 
 
-#parser top down con tabla,

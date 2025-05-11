@@ -5,12 +5,12 @@ if(a == b){
         print("iguales");
     }
     image adio = img("pedro.mp4");
-    for (a=0;a<3;a=a+1;){
+    for (a=0a<3;a=a+1;){
     }
     
     image correcto = img("correcto.mp4");
     image reinicio = img("reinicio.mp4");
 }else 
-    image reinicio = img("reinicio.mp4");
+    image reinicio = imge("reinicio.mp4");
 }
 image reinicio = img("reinicio.mp4");
