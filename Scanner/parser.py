@@ -1,151 +1,147 @@
-class Node:
-    def __init__(self, data):
-        self.data = data
-        self.children = []
-
-    def insert(self, child):
-        self.children.append(child)
-
-    def print_tree(self, level=0):
-        print("  " * level + str(self.data))
-        for child in self.children:
-            child.print_tree(level + 1)
-
+import csv
+from tabulate import tabulate
 
 class Parser:
-    def __init__(self, tokens):
-        self.tokens = tokens
-        self.pos = 0
-        self.current = self.tokens[self.pos] if self.tokens else None
-        self.errors = []
-
-    def next_token(self):
-        self.pos += 1
-        if self.pos < len(self.tokens):
-            self.current = self.tokens[self.pos]
-        else:
-            self.current = None
-
-    def match(self, expected_type):
-        if self.current and self.current[1] == expected_type:
-            self.next_token()
-            return True
-        else:
-            self.errors.append(f"Expected {expected_type}, found {self.current}")
-            return False
-
-    def program(self):
-        program_node = Node("PROGRAM")
-        while self.current:
-            if self.current[1] == "KEYWORD" and self.current[0] == "if":
-                program_node.insert(self.if_statement())
-            elif self.current[1] == "KEYWORD" and self.current[0] == "for":
-                program_node.insert(self.for_loop())
-            elif self.current[1] == "IDENTIFIER":
-                program_node.insert(self.assignment())
+    
+    def __init__(self,tok):
+        self.parsing_table = self.load_Table('/home/cholo/uni/compiladores/Scanner/ll1_table.tsv')
+        self.FirstFollow = self.load_FirstFollow("/home/cholo/uni/compiladores/Scanner/ll1_First_Follow.tsv")
+        self.tokens_ = []
+        self.inputTokens = tok
+    
+    # Carga la tabla de first y follow
+    def load_FirstFollow(self,path):
+        sync_sets = {}
+        with open(path, newline='') as tsvfile:
+            reader = csv.DictReader(tsvfile, delimiter='\t')
+            for row in reader:
+                nt = row['Nonterminal']
+                
+                # Procesar el conjunto FOLLOW
+                follow_str = row['FOLLOW'].strip()
+                follow = self.firstFollow_set(follow_str)
+                
+                sync_sets[nt] = follow
+        return sync_sets
+    
+    # Set en una biblioteca, se necesita estandarizar por , -> etc
+    def firstFollow_set(self,s):
+        """Convierte una cadena como '{$,}}' en un conjunto {'$', '}'}"""
+        s = s.strip('{}').strip()
+        if not s:
+            return set()
+        
+        # Manejar casos especiales
+        s = s.replace("'", "").replace('"', '')  # Eliminar comillas si existen
+        
+        # Separar elementos, manejando comas y caracteres especiales
+        elements = []
+        current = ''
+        in_token = False
+        
+        for char in s:
+            if char == ',':
+                if current:
+                    elements.append(current)
+                    current = ''
             else:
-                self.errors.append(f"Unexpected token {self.current}")
-                self.next_token()
-        return program_node
+                current += char
+        
+        if current:
+            elements.append(current)
+        
+        # Limpiar elementos
+        cleaned_elements = []
+        for item in elements:
+            item = item.strip()
+            if item == "$":
+                cleaned_elements.append('$')
+            elif item == "''":
+                cleaned_elements.append('')
+            elif item:
+                cleaned_elements.append(item)
+        
+        return set(cleaned_elements)
+    
+    # Carga la tabla LL1
+    def load_Table(self,file_path):
+        parsing_table = {}
+        
+        with open(file_path, 'r', newline='') as tsvfile:
+            reader = csv.DictReader(tsvfile, delimiter='\t')
+            
+            for row in reader:
+                nonterminal = row['']
+                productions = {}
+                
+                for terminal, production in row.items():
+                    if terminal != '' and production.strip():
+                        productions[terminal] = production.strip()
+                
+                parsing_table[nonterminal] = productions
+        
+        return parsing_table
+    
+    # Proceso del parser
+    def parser(self, start_symbol='Program'):
+        """
+            inputTokens: lista de tuplas (tipo, lexema, linea)
+        """
+        stack = ['$'] + [start_symbol]
+        tokens = self.inputTokens + [('$', '$', -1)]
+        index = 0
 
-    def if_statement(self):
-        if_node = Node("IF")
-        self.match("KEYWORD")  # match 'if'
-        if_node.insert(self.expression())
-        self.match("DELIMITER")  # match '('
-        if_node.insert(self.block())
-        if self.current and self.current[0] == "else":
-            self.match("KEYWORD")  # match 'else'
-            if_node.insert(self.block())
-        return if_node
+        while stack:
+            top = stack.pop()
+            current_token = tokens[index][0]
+            current_lexeme = tokens[index][1]
+            current_line = tokens[index][2]+1
 
-    def for_loop(self):
-        for_node = Node("FOR")
-        self.match("KEYWORD")  # match 'for'
-        for_node.insert(Node(self.current[0]))  # variable
-        self.match("IDENTIFIER")
-        self.match("OPERATOR")  # match '='
-        for_node.insert(self.expression())
-        self.match("DELIMITER")  # match '('
-        for_node.insert(self.block())
-        return for_node
+            if top == current_token:
+                self.tokens_.append(("🟢 TOKEN ACEPTADO ",current_token,current_lexeme,f'Linea {current_line}'))
+                index += 1
+                continue
 
-    def assignment(self):
-        assign_node = Node("ASSIGNMENT")
-        assign_node.insert(Node(self.current[0]))  # variable
-        self.match("IDENTIFIER")
-        self.match("OPERATOR")  # match '='
-        assign_node.insert(self.expression())
-        self.match("DELIMITER")  # match ';'
-        return assign_node
+            if top in ("", "''"):
+                continue
 
-    def expression(self):
-        expr_node = Node("EXPR")
-        expr_node.insert(Node(self.current[0]))  # value
-        self.match(self.current[1])  # match type (e.g., INTEGER, STRING)
-        while self.current and self.current[1] == "OPERATOR":
-            operator_node = Node(self.current[0])
-            self.match("OPERATOR")
-            operator_node.insert(expr_node)
-            operator_node.insert(Node(self.current[0]))
-            self.match(self.current[1])
-            expr_node = operator_node
-        return expr_node
+            if top in self.parsing_table:
+                row = self.parsing_table[top]
+                if current_token in row:
+                    prod = row[current_token]
+                    
+                    self.tokens_.append(("⚫ SIMBOLO NO TERMINAL",prod,"",f"Linea {current_line}"))
+                    rhs = prod.split('->', 1)[1].strip()
+                    
+                    symbols = [s for s in rhs.split() if s not in ("", "''")]
+                    for sym in reversed(symbols):
+                        stack.append(sym)
+                    continue
+                else:
+                    self.tokens_.append(("🔴 ERROR DE SINTAXIS",f"No hay producción: {top} , {current_token}",current_lexeme,f"Linea {current_line}"))
+                    
+                    while current_token not in self.FirstFollow.get(top, set()) and current_token != '$':
+                        index += 1
+                        current_token = tokens[index][0]
+                        current_lexeme = tokens[index][1]
+                        current_line = tokens[index][2]
+                
+                    self.tokens_.append(("🔵 MANEJO ERROR",current_token,current_lexeme,f"Linea {current_line}"))
+                    continue  # reiniciar con el símbolo actual del stack
+            elif top == '$':
+                if current_token == '$':
+                    self.tokens_.append("🟢 ENTRADA ACEPTADA")
+                else:
+                    self.tokens_.append(f"Tokens luego de fin de cadena: {tokens[index:]}")
+                return
+            else:
+                self.tokens_.append(("🔴 ERROR DE SINTAXIS ",f"No sync producción: {top} != {current_token}",current_lexeme,f"Linea {current_line}"))                
+                continue
 
-    def block(self):
-        block_node = Node("BLOCK")
-        while self.current and self.current[1] != "DELIMITER":
-            block_node.insert(self.statement())
-        return block_node
-
-    def statement(self):
-        if self.current[1] == "KEYWORD" and self.current[0] == "if":
-            return self.if_statement()
-        elif self.current[1] == "KEYWORD" and self.current[0] == "for":
-            return self.for_loop()
-        elif self.current[1] == "IDENTIFIER":
-            return self.assignment()
+    def showTableParser(self,NT=True):
+        headers = ["ALERTA","TOKEN", "DERIVACIÓN", "LINEA"]
+        if(NT):
+            print(tabulate(self.tokens_, headers, tablefmt="grid"))
         else:
-            self.errors.append(f"Unexpected token {self.current}")
-            self.next_token()
-            return Node("ERROR")
-
-    def parse(self):
-        ast = self.program()
-        if self.errors:
-            print("Errors found during parsing:")
-            for error in self.errors:
-                print(error)
-        else:
-            print("Parsing completed successfully.")
-        return ast
-
-
-# Example usage
-if __name__ == "__main__":
-    from tabulate import tabulate
-
-    # Example tokens from the scanner
-    tokens = [
-        ("if", "KEYWORD", 1, 1, 1),
-        ("(", "DELIMITER", 2, 2, 1),
-        ("calidad", "IDENTIFIER", 3, 10, 1),
-        (">", "OPERATOR", 11, 11, 1),
-        ("80", "INTEGER", 12, 13, 1),
-        (")", "DELIMITER", 14, 14, 1),
-        ("print", "IDENTIFIER", 15, 19, 2),
-        ("(", "DELIMITER", 20, 20, 2),
-        ("\"Alta calidad\"", "STRING", 21, 34, 2),
-        (")", "DELIMITER", 35, 35, 2),
-        (";", "DELIMITER", 36, 36, 2),
-        ("else", "KEYWORD", 37, 40, 3),
-        ("print", "IDENTIFIER", 41, 45, 4),
-        ("(", "DELIMITER", 46, 46, 4),
-        ("\"Calidad baja\"", "STRING", 47, 60, 4),
-        (")", "DELIMITER", 61, 61, 4),
-        (";", "DELIMITER", 62, 62, 4),
-    ]
-
-    parser = Parser(tokens)
-    ast = parser.parse()
-    ast.print_tree()
+            filtro = [t for t in self.tokens_ if t[0] != "⚫ SIMBOLO NO TERMINAL"]
+            print(tabulate(filtro, headers, tablefmt="grid"))
