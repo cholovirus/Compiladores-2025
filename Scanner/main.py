@@ -2,7 +2,7 @@ from scanner import *
 from parser import *
 from tabulate import tabulate
 # Lectura de codigo
-with open("/home/cholo/uni/compiladores/Scanner/code.txt", "r", encoding="utf-8") as file:
+with open("C:\\Users\\heibh\\OneDrive\\Desktop\\xXx_C++_xXx\\COMPILADORES\\Compiladores-2025\\Scanner\\code.txt") as file:
     code = file.read()
 
 # Realizar Scan
