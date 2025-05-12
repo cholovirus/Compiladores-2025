@@ -4,8 +4,8 @@ from tabulate import tabulate
 class Parser:
     
     def __init__(self,tok):
-        self.parsing_table = self.load_Table('C:\\Users\\heibh\\OneDrive\\Desktop\\xXx_C++_xXx\\COMPILADORES\\Compiladores-2025\\Scanner\\ll1_table.tsv')
-        self.FirstFollow = self.load_FirstFollow("C:\\Users\\heibh\\OneDrive\\Desktop\\xXx_C++_xXx\\COMPILADORES\\Compiladores-2025\\Scanner\\ll1_First_Follow.tsv")
+        self.parsing_table = self.load_Table('/home/cholo/uni/compiladores/Scanner/ll1_table.tsv')
+        self.FirstFollow = self.load_FirstFollow("/home/cholo/uni/compiladores/Scanner/ll1_First_Follow.tsv")
         self.tokens_ = []
         self.inputTokens = tok
     

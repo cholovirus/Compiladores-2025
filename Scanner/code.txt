@@ -1,11 +1,10 @@
 if(a == b){
-    int a=333333333333333333333333333333333333;
-    concat(a,b);
+    #hola
+    ##
+    test
+    ##
     string stream = vid("ll1_table.mp4");
-    if( a == stream) {
-        print("iguales");
-    }
-    image adio = img("pedro.mp4");
+    video adio = img("pedro.mp4");
     for (a=0a<3;a=a+1;){
     }
     
