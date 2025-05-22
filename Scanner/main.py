@@ -2,7 +2,8 @@ from scanner import *
 from parser import *
 from tabulate import tabulate
 # Lectura de codigo
-with open("C:\\Users\\heibh\\OneDrive\\Desktop\\xXx_C++_xXx\\COMPILADORES\\Compiladores-2025\\Scanner\\code.txt") as file:
+#with open("C:\\Users\\heibh\\OneDrive\\Desktop\\xXx_C++_xXx\\COMPILADORES\\Compiladores-2025\\Scanner\\code.txt") as file:
+with open("C:\\Users\\heibh\\vsprojects\\Compiladores-2025\\Scanner\\code.txt") as file:
     code = file.read()
 
 # Realizar Scan
@@ -27,3 +28,6 @@ print()
 parser = Parser(tokens)
 parser.parser()
 parser.showTableParser(False)
+
+print("\nÁRBOL DE PARSEO:")
+parser.print_parse_tree()
