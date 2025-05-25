@@ -1,8 +1,11 @@
+import os
 from scanner import *
 from parser import *
 from tabulate import tabulate
+
 # Lectura de codigo
-with open("C:\\Users\\heibh\\OneDrive\\Desktop\\xXx_C++_xXx\\COMPILADORES\\Compiladores-2025\\Scanner\\code.txt") as file:
+#with open("C:\\Users\\heibh\\OneDrive\\Desktop\\xXx_C++_xXx\\COMPILADORES\\Compiladores-2025\\Scanner\\code.txt") as file:
+with open("C:\\Users\\heibh\\vsprojects\\Compiladores-2025\\Scanner\\code2.txt") as file:
     code = file.read()
 
 # Realizar Scan
@@ -27,3 +30,8 @@ print()
 parser = Parser(tokens)
 parser.parser()
 parser.showTableParser(False)
+
+print("\nARBOL DE PARSEO:")
+parser.print_parse_tree()
+parser.export_parse_tree_to_pdf("arbol_de_parseo.pdf")
+parser.export_tree_picture("arbol_parseo.png")
