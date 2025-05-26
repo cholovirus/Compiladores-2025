@@ -33,6 +33,17 @@ Este proyecto está hecho **completamente en Python puro**. Solo se usa la bibli
 
 ---
 
+### ⚙️ Instalación rápida
+
+Este proyecto incluye un script para instalar automáticamente las dependencias de Python y verificar si Graphviz está instalado.
+
+Ejecuta el siguiente comando:
+
+```bash
+./install.sh
+
+---
+
 ### 📦 Dependencias de Python
 
 Instálalas con:
