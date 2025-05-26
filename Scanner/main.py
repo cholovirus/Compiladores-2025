@@ -1,6 +1,8 @@
+import os
 from scanner import *
 from parser import *
 from tabulate import tabulate
+
 # Lectura de codigo
 
 nombre = "code2.txt"
@@ -28,4 +30,9 @@ print("VISUALIZACIÓN PARSER:")
 print()
 parser = Parser(tokens)
 parser.parser()
-parser.showTableParser(True)
+parser.showTableParser(False)
+
+print("\nARBOL DE PARSEO:")
+parser.print_parse_tree()
+parser.export_parse_tree_to_pdf("arbol_de_parseo.pdf")
+parser.export_tree_picture("arbol_parseo.png")

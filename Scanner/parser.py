@@ -1,5 +1,9 @@
+import os
 import csv
 from tabulate import tabulate
+from anytree import Node, RenderTree
+from anytree.exporter import DotExporter
+from anytree.exporter import UniqueDotExporter
 
 class Parser:
     
@@ -8,6 +12,9 @@ class Parser:
         self.FirstFollow = self.load_FirstFollow("/home/cholo/uni/compiladores/Scanner/ll1_First_Follow.tsv")
         self.tokens_ = []
         self.inputTokens = tok
+
+        self.root = None
+        self.current_nodes_stack = [] # Pila de nodos actuales
     
     # Carga la tabla de first y follow
     def load_FirstFollow(self,path):
@@ -82,6 +89,47 @@ class Parser:
         
         return parsing_table
     
+    # expandir nodos
+    def expand_node(self, parent, symbols):
+        """
+            Expande un nodo con un nuevo símbolo.
+        """
+        children = []
+        for symbol in symbols:
+            node = Node(symbol, parent=parent)
+            children.append(node)
+        return children
+
+    # Imprimir el arbol
+    def print_parse_tree(self):
+        """
+            Imprime el árbol de análisis sintáctico.
+        """
+        if self.root:
+            for pre, fill, node in RenderTree(self.root):
+                print(f"{pre}{node.name}")
+
+    # Exportar el arbol a un archivo .dot
+    def export_parse_tree_to_pdf(self, filename="parse_tree.pdf"):
+        if self.root:
+            print("[INFO] Generando archivo DOT...")
+            DotExporter(self.root).to_dotfile("tree.dot")
+            print("[INFO] Ejecutando Graphviz para generar PDF...")
+            result = os.system(f"dot -Tpdf tree.dot -o {filename}")
+            if result == 0:
+                print(f"[OK] Árbol de parseo exportado como {filename}")
+            else:
+                print("[ERROR] Falló la generación del PDF. ¿Está Graphviz instalado y en el PATH?")
+
+    # Exportar el arbol a un archivo a .jpg
+    def export_tree_picture(self, filename="arbol_parseo.png"):
+        if self.root:
+            UniqueDotExporter(self.root).to_dotfile("safe_tree.dot")
+            os.system(f"dot -Tpng safe_tree.dot -o {filename}")
+            print(f"[OK] Árbol de parseo guardado en {filename}")
+        else:
+            print("[ERROR] Árbol no construido.")
+
     # Proceso del parser
     def parser(self, start_symbol='Program'):
         """
@@ -91,6 +139,9 @@ class Parser:
         tokens = self.inputTokens + [('$', '$', -1)]
         index = 0
 
+        self.root = Node(start_symbol)
+        self.current_nodes_stack = [self.root]
+
         while stack:
             top = stack.pop()
             current_token = tokens[index][0]
@@ -99,6 +150,13 @@ class Parser:
 
             if top == current_token:
                 self.tokens_.append(("🟢 TOKEN ACEPTADO ",current_token,current_lexeme,f'Linea {current_line}'))
+
+                if self.current_nodes_stack:
+                    matched_node = self.current_nodes_stack.pop()
+                    matched_node.name += f" ({current_token})"
+                else:
+                    print(f"[WARNING] Nodo para '{current_token}' no encontrado en la pila de nodos actuales.")
+
                 index += 1
                 continue
 
@@ -114,6 +172,14 @@ class Parser:
                     rhs = prod.split('->', 1)[1].strip()
                     
                     symbols = [s for s in rhs.split() if s not in ("", "''")]
+
+                    if self.current_nodes_stack:
+                        parent = self.current_nodes_stack.pop()
+                        children = self.expand_node(parent, symbols)
+                        self.current_nodes_stack.extend(reversed(children))
+                    else:
+                        print(f"[WARNING] No hay nodo padre para la producción '{prod}'.")
+
                     for sym in reversed(symbols):
                         stack.append(sym)
                     continue
