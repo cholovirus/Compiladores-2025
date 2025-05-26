@@ -1,11 +1,9 @@
 if(a == b){
-    #hola
-    ##
-    test
-    ##
-    string stream = vid("ll1_table.mp4");
-    video adio = img("pedro.mp4");
-    for (a=0a<3;a=a+1;){
+   
+    video stream = vid("ll1_table.mp4");
+    video adio = vid("pedro.mp4");
+    for (a=0; b==3 ; a = a+a;){
+        image correcto = img("correcto.mp4");    
     }
     
     image correcto = img("correcto.mp4");

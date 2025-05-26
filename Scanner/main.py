@@ -2,7 +2,9 @@ from scanner import *
 from parser import *
 from tabulate import tabulate
 # Lectura de codigo
-with open("/home/cholo/uni/compiladores/Scanner/code.txt") as file:
+
+nombre = "code2.txt"
+with open("/home/cholo/uni/compiladores/Scanner/" + nombre) as file:
     code = file.read()
 
 # Realizar Scan
@@ -26,4 +28,4 @@ print("VISUALIZACIÓN PARSER:")
 print()
 parser = Parser(tokens)
 parser.parser()
-parser.showTableParser(False)
+parser.showTableParser(True)
