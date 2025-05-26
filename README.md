@@ -41,7 +41,7 @@ Ejecuta el siguiente comando:
 
 ```bash
 ./install.sh
-
+```
 ---
 
 ### 📦 Dependencias de Python
