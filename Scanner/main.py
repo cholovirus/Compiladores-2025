@@ -2,11 +2,14 @@ import os
 from scanner import *
 from parser import *
 from tabulate import tabulate
-
+from pathlib import Path
 # Lectura de codigo
 
-nombre = "code2.txt"
-with open("/home/cholo/uni/compiladores/Scanner/" + nombre) as file:
+nombre = "code.txt"
+ruta_archivo = Path(__file__).resolve().parent
+ruta_archivo= ruta_archivo / "Code" / nombre
+
+with open(ruta_archivo) as file:
     code = file.read()
 
 # Realizar Scan

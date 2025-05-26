@@ -4,12 +4,18 @@ from tabulate import tabulate
 from anytree import Node, RenderTree
 from anytree.exporter import DotExporter
 from anytree.exporter import UniqueDotExporter
+from pathlib import Path
 
 class Parser:
     
     def __init__(self,tok):
-        self.parsing_table = self.load_Table('/home/cholo/uni/compiladores/Scanner/ll1_table.tsv')
-        self.FirstFollow = self.load_FirstFollow("/home/cholo/uni/compiladores/Scanner/ll1_First_Follow.tsv")
+        ruta_archivo = Path(__file__).resolve().parent
+        
+        self.parsing_table = self.load_Table(ruta_archivo / "ll1_table.tsv")
+        self.FirstFollow = self.load_FirstFollow(ruta_archivo / "ll1_First_Follow.tsv")
+
+        #self.parsing_table = self.load_Table('/home/cholo/uni/compiladores/Scanner/ll1_table.tsv')
+        #self.FirstFollow = self.load_FirstFollow("/home/cholo/uni/compiladores/Scanner/ll1_First_Follow.tsv")
         self.tokens_ = []
         self.inputTokens = tok
 
@@ -112,10 +118,15 @@ class Parser:
     # Exportar el arbol a un archivo .dot
     def export_parse_tree_to_pdf(self, filename="parse_tree.pdf"):
         if self.root:
+            carpeta_salida = Path(__file__).resolve().parent / "archivos"
+            carpeta_salida.mkdir(exist_ok=True)  # Crea la carpeta si no existe
+            ruta_dot = carpeta_salida / "tree.dot"
+            ruta_pdf = carpeta_salida / filename
+
             print("[INFO] Generando archivo DOT...")
-            DotExporter(self.root).to_dotfile("tree.dot")
+            DotExporter(self.root).to_dotfile(ruta_dot)
             print("[INFO] Ejecutando Graphviz para generar PDF...")
-            result = os.system(f"dot -Tpdf tree.dot -o {filename}")
+            result = os.system(f"dot -Tpdf \"{ruta_dot}\" -o \"{ruta_pdf}\"")
             if result == 0:
                 print(f"[OK] Árbol de parseo exportado como {filename}")
             else:
@@ -124,8 +135,14 @@ class Parser:
     # Exportar el arbol a un archivo a .jpg
     def export_tree_picture(self, filename="arbol_parseo.png"):
         if self.root:
-            UniqueDotExporter(self.root).to_dotfile("safe_tree.dot")
-            os.system(f"dot -Tpng safe_tree.dot -o {filename}")
+            carpeta_salida = Path(__file__).resolve().parent / "archivos"
+            carpeta_salida.mkdir(exist_ok=True)  # Crea la carpeta si no existe
+            ruta_dot = carpeta_salida / "safe_tree.dot"
+            ruta_png = carpeta_salida / filename
+
+            UniqueDotExporter(self.root).to_dotfile(ruta_dot)
+            os.system(f"dot -Tpng \"{ruta_dot}\" -o \"{ruta_png}\"")
+
             print(f"[OK] Árbol de parseo guardado en {filename}")
         else:
             print("[ERROR] Árbol no construido.")
