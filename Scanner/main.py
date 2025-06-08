@@ -2,7 +2,11 @@ from scanner import *
 from parser import *
 from tabulate import tabulate
 # Lectura de codigo
+<<<<<<< Updated upstream
 with open("/home/cholo/uni/compiladores/Scanner/code.txt", "r", encoding="utf-8") as file:
+=======
+with open("/home/luish/Documents/ucsp/compiladores/repocomp/Scanner/code.txt") as file:
+>>>>>>> Stashed changes
     code = file.read()
 
 # Realizar Scan
@@ -26,4 +30,17 @@ print("VISUALIZACIÓN PARSER:")
 print()
 parser = Parser(tokens)
 parser.parser()
+<<<<<<< Updated upstream
 parser.showTableParser(False)
+=======
+parser.showTableParser(False)
+
+print("\nARBOL DE PARSEO:")
+parser.print_parse_tree()
+#parser.export_parse_tree_to_pdf("arbol_de_parseo.pdf")
+#parser.export_tree_picture("arbol_parseo.png")
+
+# Mostrar árbol reducido (syntax tree)
+print("\nARBOL REDUCIDO (SYNTAX TREE):")
+parser.generate_syntax_tree()
+>>>>>>> Stashed changes

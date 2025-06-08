@@ -1,14 +1,38 @@
 import csv
 from tabulate import tabulate
+from anytree import Node, RenderTree
+from anytree.exporter import DotExporter
+from anytree.exporter import UniqueDotExporter
+from reductor import reduce_tree
 
 class Parser:
     
     def __init__(self,tok):
-        self.parsing_table = self.load_Table('/home/cholo/uni/compiladores/Scanner/ll1_table.tsv')
-        self.FirstFollow = self.load_FirstFollow("/home/cholo/uni/compiladores/Scanner/ll1_First_Follow.tsv")
+        #self.parsing_table = self.load_Table('C:\\Users\\heibh\\OneDrive\\Desktop\\xXx_C++_xXx\\COMPILADORES\\Compiladores-2025\\Scanner\\ll1_table.tsv')
+        #self.FirstFollow = self.load_FirstFollow("C:\\Users\\heibh\\OneDrive\\Desktop\\xXx_C++_xXx\\COMPILADORES\\Compiladores-2025\\Scanner\\ll1_First_Follow.tsv")
+        self.parsing_table = self.load_Table('/home/luish/Documents/ucsp/compiladores/repocomp/Scanner/ll1_table.tsv')
+        self.FirstFollow = self.load_FirstFollow("/home/luish/Documents/ucsp/compiladores/repocomp/Scanner/ll1_First_Follow.tsv")
         self.tokens_ = []
         self.inputTokens = tok
+
+        self.root = None
+        self.current_nodes_stack = [] # Pila de nodos actuales
     
+    def generate_syntax_tree(self):
+        """
+        Generates and prints the reduced syntax tree (AST).
+        """
+        if not hasattr(self, 'root'):
+            print("[ERROR] Parse tree root not found.")
+            return
+
+        print("\nREDUCED SYNTAX TREE:")
+        reduced_root = reduce_tree(self.root)
+        if reduced_root:
+            for pre, fill, node in RenderTree(reduced_root):
+                print(f"{pre}{node.name}")
+        else:
+            print("[ERROR] Could not reduce the parse tree.")
     # Carga la tabla de first y follow
     def load_FirstFollow(self,path):
         sync_sets = {}
