@@ -5,6 +5,8 @@ from anytree import Node, RenderTree
 from anytree.exporter import DotExporter
 from anytree.exporter import UniqueDotExporter
 from pathlib import Path
+from reductor import reduce_tree
+
 
 class Parser:
     
@@ -37,7 +39,23 @@ class Parser:
                 sync_sets[nt] = follow
         return sync_sets
     
-    # Set en una biblioteca, se necesita estandarizar por , -> etc
+    def generate_syntax_tree(self):
+        """
+        Generates and prints the reduced syntax tree (AST).
+        """
+        if not hasattr(self, 'root') or self.root is None:
+            print("[ERROR] Parse tree root not found.")
+            return
+
+        print("\nREDUCED SYNTAX TREE:")
+        reduced_root = reduce_tree(self.root)
+        if reduced_root:
+            for pre, fill, node in RenderTree(reduced_root):
+                print(f"{pre}{node.name}")
+        else:
+            print("[ERROR] Could not reduce the parse tree.")
+
+
     def firstFollow_set(self,s):
         """Convierte una cadena como '{$,}}' en un conjunto {'$', '}'}"""
         s = s.strip('{}').strip()
@@ -170,7 +188,7 @@ class Parser:
 
                 if self.current_nodes_stack:
                     matched_node = self.current_nodes_stack.pop()
-                    matched_node.name += f" ({current_token})"
+                    matched_node.name = f"{current_lexeme} ({current_token})"
                 else:
                     print(f"[WARNING] Nodo para '{current_token}' no encontrado en la pila de nodos actuales.")
 

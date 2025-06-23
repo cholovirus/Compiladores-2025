@@ -37,5 +37,9 @@ parser.showTableParser(False)
 
 print("\nARBOL DE PARSEO:")
 parser.print_parse_tree()
-parser.export_parse_tree_to_pdf("arbol_de_parseo.pdf")
-parser.export_tree_picture("arbol_parseo.png")
+
+print("\nARBOL REDUCIDO (SYNTAX TREE):")
+parser.generate_syntax_tree()
+
+#parser.export_parse_tree_to_pdf("arbol_de_parseo.pdf")
+#parser.export_tree_picture("arbol_parseo.png")
