@@ -4,7 +4,6 @@ from parser import *
 from tabulate import tabulate
 from pathlib import Path
 from Semantic import *
-from gen import *
 # Lectura de codigo
 
 nombre = "code3.txt"
