@@ -1,8 +1,16 @@
+import os
 from scanner import *
 from parser import *
 from tabulate import tabulate
+from pathlib import Path
+from Semantic import *
 # Lectura de codigo
-with open("/home/cholo/uni/compiladores/Scanner/code.txt", "r", encoding="utf-8") as file:
+
+nombre = "code3.txt"
+ruta_archivo = Path(__file__).resolve().parent
+ruta_archivo= ruta_archivo / "Code" / nombre
+
+with open(ruta_archivo) as file:
     code = file.read()
 
 # Realizar Scan
@@ -27,3 +35,17 @@ print()
 parser = Parser(tokens)
 parser.parser()
 parser.showTableParser(False)
+
+print("\nARBOL DE PARSEO:")
+parser.print_parse_tree()
+parser.export_parse_tree_to_pdf("arbol_de_parseo.pdf")
+parser.export_tree_picture("arbol_parseo.png")
+
+
+# Mostrar árbol reducido (syntax tree)
+print("\nARBOL REDUCIDO (SYNTAX TREE):")
+reduced_ast = parser.generate_syntax_tree()
+
+if reduced_ast:
+    # 3) Traduce y escribe el script
+    translate_to_python(reduced_ast, output_path="edicion_video.py")
