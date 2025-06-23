@@ -5,6 +5,7 @@ from anytree import Node, RenderTree
 from anytree.exporter import DotExporter
 from anytree.exporter import UniqueDotExporter
 from pathlib import Path
+from reductor import reduce_tree
 
 class Parser:
     
@@ -14,14 +15,33 @@ class Parser:
         self.parsing_table = self.load_Table(ruta_archivo / "ll1_table.tsv")
         self.FirstFollow = self.load_FirstFollow(ruta_archivo / "ll1_First_Follow.tsv")
 
-        #self.parsing_table = self.load_Table('/home/cholo/uni/compiladores/Scanner/ll1_table.tsv')
-        #self.FirstFollow = self.load_FirstFollow("/home/cholo/uni/compiladores/Scanner/ll1_First_Follow.tsv")
         self.tokens_ = []
         self.inputTokens = tok
 
         self.root = None
         self.current_nodes_stack = [] # Pila de nodos actuales
+        
     
+    #Luis
+    def generate_syntax_tree(self):
+        """
+        Generates and prints the reduced syntax tree (AST).
+        """
+        if not hasattr(self, 'root'):
+            print("[ERROR] Parse tree root not found.")
+            return None
+
+        print("\nREDUCED SYNTAX TREE:")
+        print(self.root)
+        reduced_root = reduce_tree(self.root)
+        if reduced_root:
+            for pre, fill, node in RenderTree(reduced_root):
+                print(f"{pre}{node.name}")
+            return reduced_root
+        else:
+            print("[ERROR] Could not reduce the parse tree.")
+            return None
+
     # Carga la tabla de first y follow
     def load_FirstFollow(self,path):
         sync_sets = {}
@@ -170,7 +190,9 @@ class Parser:
 
                 if self.current_nodes_stack:
                     matched_node = self.current_nodes_stack.pop()
-                    matched_node.name += f" ({current_token})"
+                    matched_node.name += f" ({current_lexeme})"
+                    #matched_node.name += f" ({current_token})"
+                    print(matched_node)
                 else:
                     print(f"[WARNING] Nodo para '{current_token}' no encontrado en la pila de nodos actuales.")
 
@@ -189,10 +211,11 @@ class Parser:
                     rhs = prod.split('->', 1)[1].strip()
                     
                     symbols = [s for s in rhs.split() if s not in ("", "''")]
-
+                   
                     if self.current_nodes_stack:
                         parent = self.current_nodes_stack.pop()
                         children = self.expand_node(parent, symbols)
+                        
                         self.current_nodes_stack.extend(reversed(children))
                     else:
                         print(f"[WARNING] No hay nodo padre para la producción '{prod}'.")
