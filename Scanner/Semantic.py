@@ -1,12 +1,15 @@
+from lema import *
 from pathlib import Path
 from typing import List, Set
 from anytree import Node
 
-def translate_to_python(root: Node, output_path: str = "edicion_video.py"):
+def translate_to_python(root: Node, output_path: str = "edicion_video.txt", init: int =1):
     lines: List[str] = []
     indent_level = 0
     loaded_resources: Set[str] = set()
-
+    if(init):
+        traducction(root)
+        return 
     def emit(line: str, indent_delta: int = 0):
         nonlocal indent_level
         lines.append("    " * indent_level + line)

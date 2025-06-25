@@ -4,6 +4,7 @@ from parser import *
 from tabulate import tabulate
 from pathlib import Path
 from Semantic import *
+
 # Lectura de codigo
 
 nombre = "code3.txt"
@@ -48,4 +49,6 @@ reduced_ast = parser.generate_syntax_tree()
 
 if reduced_ast:
     # 3) Traduce y escribe el script
-    translate_to_python(reduced_ast, output_path="edicion_video.py")
+    translate_to_python(reduced_ast)
+    a=0
+    

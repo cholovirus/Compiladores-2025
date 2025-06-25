@@ -190,9 +190,9 @@ class Parser:
 
                 if self.current_nodes_stack:
                     matched_node = self.current_nodes_stack.pop()
-                    matched_node.name += f" ({current_lexeme})"
+                    #matched_node.name += f" ({current_lexeme})"
+                    matched_node.name = f"{current_lexeme} ({current_token})"
                     #matched_node.name += f" ({current_token})"
-                    print(matched_node)
                 else:
                     print(f"[WARNING] Nodo para '{current_token}' no encontrado en la pila de nodos actuales.")
 
