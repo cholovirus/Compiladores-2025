@@ -3,9 +3,10 @@ from scanner import *
 from parser import *
 from tabulate import tabulate
 from pathlib import Path
+from Semantic import *
 # Lectura de codigo
 
-nombre = "code.txt"
+nombre = "code3.txt"
 ruta_archivo = Path(__file__).resolve().parent
 ruta_archivo= ruta_archivo / "Code" / nombre
 
@@ -39,3 +40,12 @@ print("\nARBOL DE PARSEO:")
 parser.print_parse_tree()
 parser.export_parse_tree_to_pdf("arbol_de_parseo.pdf")
 parser.export_tree_picture("arbol_parseo.png")
+
+
+# Mostrar árbol reducido (syntax tree)
+print("\nARBOL REDUCIDO (SYNTAX TREE):")
+reduced_ast = parser.generate_syntax_tree()
+
+if reduced_ast:
+    # 3) Traduce y escribe el script
+    translate_to_python(reduced_ast, output_path="edicion_video.py")

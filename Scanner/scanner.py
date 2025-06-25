@@ -1,12 +1,3 @@
-# gramtica:, comentarios, al menos 2 tipos de datos,
-# rango de enteros y flotantes
-# ids
-# 1 forma de iterar
-# una forma de iterar, operadores basicos, operadores de comparacion doble caracter
-# palabras reservadas
-# lenguaje, abrir video, componer videos, componer videos, 
-# delimitadores
-#parser top down con tabla,
 class Scan:
     def __init__(self,codigo):
         self.code = codigo
